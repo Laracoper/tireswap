@@ -42,7 +42,9 @@ new #[Layout('components.layouts.app')] class extends Component {
             'radius' => 'required|integer|min:12|max:30',
             'intent' => 'required',
             'photos' => 'required|array|min:1',
-            'photos.*' => 'image|mimes:jpeg,png,jpg,webp,avif|max:5120',
+            // 'photos.*' => 'image|mimes:jpeg,png,jpg,webp,avif|max:5120',
+            'photos.*' => 'required|file|mimetypes:image/jpeg,image/png,image/webp,image/avif|max:5120',
+
         ], [
             'brand.required' => 'Введите марку шин',
             'brand.min' => 'Название слишком короткое',

@@ -1,9 +1,10 @@
 <x-layouts.app title="Личный кабинет">
     <div class="space-y-8 pb-20 md:pb-0">
         <div class="flex justify-between items-end">
+          
             <div>
                 <p class="text-xs font-black text-brand uppercase tracking-widest mb-1">Профиль мастера</p>
-                <h1 class="text-2xl md:text-4xl font-black">ЛК: {{ auth()->user()->name }}</h1>
+                <h1 class="text-2xl md:text-4xl font-black">Здравствуйте {{ auth()->user()->name }}</h1>
             </div>
         </div>
         
@@ -24,7 +25,9 @@
 
         <div class="space-y-4">
             <h2 class="text-lg font-black uppercase tracking-tighter text-slate-400">Активные предложения</h2>
-            <livewire:components.user-wheels />
+            {{-- <livewire:components.user-wheels /> --}}
+            <livewire:components.user-wheels :onlyMy="true" />
+
         </div>
     </div>
 </x-layouts.app>

@@ -4,7 +4,16 @@ use Illuminate\Support\Facades\Route;
 use Livewire\Volt\Volt;
 
 // 1. Публичные роуты
-Route::view('/', 'welcome');
+// Route::view('/', 'welcome');
+Route::get('/', function () {
+    return view('welcome');
+})->name('home');
+// В файле routes/web.php
+// Volt::route('/', 'welcome')->name('home');
+// Route::view('/', 'welcome')->name('home');
+
+
+
 Volt::route('/wheels', 'pages.wheels.index')->name('wheels.index');
 
 // 2. Только для гостей
@@ -22,7 +31,8 @@ Route::middleware('auth')->group(function () {
     // Volt::route('/messages', 'pages.messages.index')->name('messages.index');
     // Volt::route('/messages', 'msg')->name('messages.index');
     Volt::route('/test', 'test');
-    Volt::route('/messages', 'chat')->name('messages.index');
+    // Volt::route('/messages', 'chat')->name('messages.index');
+    Volt::route('/messages', 'pages.messages.index')->name('messages.index');
 
 
     

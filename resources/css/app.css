@@ -1,23 +1,24 @@
 @import "tailwindcss";
-@source "../views";
-@source "../livewire";
 
 @theme {
+    /* Твои кастомные цвета */
     --color-brand: #3b82f6;
     --color-surface: #0f172a;
     --color-bg: #020617;
 }
 
 @layer base {
-    body { @apply bg-bg text-slate-200 antialiased font-sans; }
+    /* Применяем фон и шрифт для всего приложения */
+    body { 
+        @apply bg-bg text-slate-200 antialiased font-sans; 
+    }
     
-    /* Делаем плейсхолдеры ярче */
+    /* Стили для инпутов, чтобы они везде выглядели одинаково */
     input::placeholder, textarea::placeholder {
         @apply text-slate-500 opacity-100;
     }
     
     input, select { 
-        @apply bg-bg border border-slate-800 rounded-xl px-4 py-3 outline-hidden focus:ring-4 ring-brand/20 transition-all w-full text-white; 
+        @apply bg-bg border border-slate-800 rounded-xl px-4 py-3 outline-none focus:ring-4 focus:ring-brand/20 transition-all w-full text-white; 
     }
 }
-

@@ -1,24 +1,29 @@
 <?php
 use Livewire\Volt\Component;
 use App\Models\Message;
-use Livewire\Attributes\On;
+use Illuminate\Support\Facades\Auth;
 
 new class extends Component {
-    // Слушаем событие прихода нового сообщения
+    
     public function getListeners() {
-        return ["echo-private:chat." . auth()->id() . ",MessageSent" => '$refresh'];
+        return [
+            // Реалтайм обновление через сокеты
+            "echo-private:chat." . Auth::id() . ",MessageSent" => '$refresh',
+            // Обновление, когда мы прочитали сообщения внутри страницы чата
+            "refresh-counter" => '$refresh',
+        ];
     }
 
     public function getCountProperty() {
-        return Message::where('receiver_id', auth()->id())
+        return Message::where('receiver_id', Auth::id())
                       ->where('is_read', false)
                       ->count();
     }
 }; ?>
 
-<div wire:poll.10s> {{-- На всякий случай проверяем раз в 10 сек, если сокеты моргнут --}}
+<div wire:poll.30s>
     @if($this->count > 0)
-        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-bold text-white shadow-lg shadow-red-500/40 animate-pulse">
+        <span class="flex h-5 w-5 items-center justify-center rounded-full bg-red-500 text-[10px] font-black text-white shadow-lg shadow-red-500/40 animate-pulse border border-red-400/20">
             {{ $this->count }}
         </span>
     @endif
